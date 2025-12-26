@@ -10,7 +10,26 @@ class AuthenticationApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme:  ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.dark)
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.dark),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: Colors.teal
+            )
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(
+                  color: Colors.teal
+              )
+          ),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            minimumSize: Size(double.infinity, 40)
+          )
+        )
       ),
       home: WelcomePage(),
     );

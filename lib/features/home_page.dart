@@ -16,14 +16,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text("Authentication App"),),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(children: [
-              Lottie.asset('assets/lotties/Home.json'),
-              const SizedBox(height: 20,),
-              Text('Authenticated', style: kTextStyle.pageTitle,),
-              Text("Home page is under development", style: Theme.of(context).textTheme.bodyLarge,)
-            ]),
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(children: [
+                Lottie.asset('assets/lotties/Home.json'),
+                const SizedBox(height: 20,),
+                Text('Authenticated', style: kTextStyle.pageTitle,),
+                Text("Home page is under development", style: Theme.of(context).textTheme.bodyLarge,)
+              ]),
+            ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:authapp/constants/constants.dart';
+import 'package:authapp/pages/forgotten_password.dart';
 import 'package:authapp/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -73,6 +74,17 @@ class RegisterPage extends StatelessWidget {
                 child: Text("Register"),
               ),
               const SizedBox(height: 24),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgottenPassword(),
+                    ),
+                  );
+                },
+                child: Text('Reset Password'),
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -89,6 +101,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 16,),
             ],
           ),
         ),

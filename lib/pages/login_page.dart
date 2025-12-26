@@ -1,5 +1,6 @@
 import 'package:authapp/bottom_nav_screen.dart';
 import 'package:authapp/constants/constants.dart';
+import 'package:authapp/pages/forgotten_password.dart';
 import 'package:authapp/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -18,7 +19,7 @@ class LoginPage extends StatelessWidget {
             children: [
               SizedBox(
                 width: 250,
-                child: Lottie.asset('assets/lotties/login.json', ),
+                child: Lottie.asset('assets/lotties/login.json'),
               ),
               Text('Login With', style: kTextStyle.pageTitle),
               const SizedBox(height: 24),
@@ -46,7 +47,12 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> BottomNavScreen()), (route)=> false);
+                  selectedPageNotifier.value = 0;
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomNavScreen()),
+                    (route) => false,
+                  );
                 },
                 style: FilledButton.styleFrom(
                   minimumSize: Size(double.infinity, 40),
@@ -54,6 +60,17 @@ class LoginPage extends StatelessWidget {
                 child: Text("Login"),
               ),
               const SizedBox(height: 24),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgottenPassword(),
+                    ),
+                  );
+                },
+                child: Text('Reset Password'),
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -23,32 +23,12 @@ class RegisterPage extends StatelessWidget {
               ),
               Text('Register Screen', style: kTextStyle.pageTitle),
               const SizedBox(height: 24),
-              TextFormField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.email_outlined),
-                  hintText: "Full name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
+
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email_outlined),
                   hintText: "Email",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.email_outlined),
-                  hintText: "Contact number",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

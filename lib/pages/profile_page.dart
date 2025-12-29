@@ -1,8 +1,10 @@
+import 'package:authapp/appp/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/change_username.dart';
 import 'package:authapp/pages/delete_account.dart';
 import 'package:authapp/pages/reset_password.dart';
 import 'package:authapp/pages/welcome_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,6 +15,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String _errorMessage = '';
+
+  Future<void> _logOut() async {
+    try {
+      await authService.value.signOut();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Account Successfully logged out!')),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message ?? "Something went wrong";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +48,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
-                  child: Text('Welcome, User', style: kTextStyle.pageTitle),
+                  child: Text(
+                    'Welcome, ${authService.value.currentUser!.displayName ?? "User"}',
+                    style: kTextStyle.pageTitle,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -37,11 +59,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 title: Text("Change Username"),
                 trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  Navigator.push(
+                onTap: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChangeUsername()),
                   );
+                  setState(() {});
                 },
               ),
               ListTile(
@@ -67,13 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 title: Text("Log Out"),
                 trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => WelcomePage()),
-                    (route) => false,
-                  );
-                },
+                onTap: _logOut,
               ),
             ],
           ),

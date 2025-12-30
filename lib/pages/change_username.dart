@@ -22,7 +22,19 @@ class _ChangeUsernameState extends State<ChangeUsername> {
         username: userNameController.text.trim(),
       );
       _errorMessage = '';
+
       if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'User name has been updated...!',
+              style: TextStyle(color: Colors.white),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.teal.shade900,
+            duration: Duration(seconds: 3),
+          ),
+        );
         Navigator.pop(context);
       }
     } on FirebaseAuthException catch (e) {
@@ -58,22 +70,13 @@ class _ChangeUsernameState extends State<ChangeUsername> {
                   return null;
                 },
               ),
-              Text(_errorMessage.toString() ?? '', style: TextStyle(color: Colors.red),),
+              Text(
+                _errorMessage.toString() ?? '',
+                style: TextStyle(color: Colors.red),
+              ),
               const SizedBox(height: 10),
               FilledButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'User name has been updated...!',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.teal.shade900,
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                },
+                onPressed: updateUserName,
                 style: FilledButton.styleFrom(
                   minimumSize: Size(double.infinity, 40),
                 ),

@@ -72,8 +72,6 @@ class DeleteAccount extends StatelessWidget {
                       );
                     },
                   );
-
-
                 },
                 child: Text("Delete"),
               ),

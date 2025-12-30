@@ -1,3 +1,4 @@
+import 'package:authapp/appp/mobile/auth_wrapper.dart';
 import 'package:authapp/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class AuthenticationApp extends StatelessWidget {
           )
         )
       ),
-      home: WelcomePage(),
+      home: AuthWrapper(),
     );
   }
 }

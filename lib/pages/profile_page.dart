@@ -2,8 +2,8 @@ import 'package:authapp/appp/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/change_username.dart';
 import 'package:authapp/pages/delete_account.dart';
+import 'package:authapp/pages/login_page.dart';
 import 'package:authapp/pages/reset_password.dart';
-import 'package:authapp/pages/welcome_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,11 +16,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String _errorMessage = '';
+  User? user = authService.value.currentUser;
 
   Future<void> _logOut() async {
     try {
       await authService.value.signOut();
       if (mounted) {
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LoginPage()), (route)=> false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Account Successfully logged out!')),
         );
@@ -35,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Authentication App")),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -49,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Center(
                   child: Text(
-                    'Welcome, ${authService.value.currentUser!.displayName ?? "User"}',
+                    'Welcome, ${user!.displayName} ' ,
                     style: kTextStyle.pageTitle,
                   ),
                 ),

@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Authentication App"),),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(

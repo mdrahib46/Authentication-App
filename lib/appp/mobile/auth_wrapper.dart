@@ -20,11 +20,9 @@ class _AuthWrapperState extends State<AuthWrapper> {
           body: Center(child: CircularProgressIndicator(),),
         );
       }
-
       if(snapShot.hasData){
         return BottomNavScreen();
       }
-
       return LoginPage();
     });
   }

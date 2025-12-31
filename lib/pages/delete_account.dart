@@ -1,5 +1,6 @@
 import 'package:authapp/appp/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
+import 'package:authapp/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -13,38 +14,37 @@ class DeleteAccount extends StatefulWidget {
 
 class _DeleteAccountState extends State<DeleteAccount> {
 
-  final TextEditingController userEmail = TextEditingController();
-  final TextEditingController userPassword = TextEditingController();
+  final TextEditingController userEmailController = TextEditingController();
+  final TextEditingController userPasswordController = TextEditingController();
 
   String _errorMessage = '';
 
-  Future<void> deleteAccount() async{
+  Future<void> deleteAccount() async {
+    try {
+      await authService.value.deleteAccount(
+        userEmail: userEmailController.text,
+        userPassword: userPasswordController.text,
+      );
 
-    try{
-      await authService.value.deleteAccount(userEmail: userEmail.text.trim(), userPassword: userPassword.text.trim());
       if(mounted){
-        setState(() {
-          _errorMessage = '';
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Account has been deleted...!',
-                style: TextStyle(color: Colors.white),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.teal.shade900,
-            ),
-          );
-        });
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Account has been deleted...!")),
+        );
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginPage()),
+              (route) => false,
+        );
       }
-    } on FirebaseAuthException catch(e){
+
+    } on FirebaseAuthException catch (e) {
       setState(() {
         _errorMessage = e.message ?? "Something went wrong..!";
       });
     }
-
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,44 +61,19 @@ class _DeleteAccountState extends State<DeleteAccount> {
               ),
               const SizedBox(height: 10),
               Text('Delete Account', style: kTextStyle.pageTitle),
-              TextFormField(decoration: InputDecoration(hintText: 'Email')),
+              TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: userEmailController,
+                  decoration: InputDecoration(hintText: 'Email')),
               const SizedBox(height: 10),
-              TextFormField(decoration: InputDecoration(hintText: 'Password')),
+              TextFormField(
+                controller: userPasswordController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(hintText: 'Password')),
               const SizedBox(height: 10),
               FilledButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Row(
-                          children: [
-                            Text("Warning...!"),
-                            const Spacer(),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.close, color: Colors.red),
-                            ),
-                          ],
-                        ),
-                        content: Text("Do you really want to delete your account ?"),
-                        actions: [
-                          TextButton(
-                            onPressed: deleteAccount,
-                            child: Text("Delete"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text("No"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                onPressed: (){
+                  deleteAccount();
                 },
                 child: Text("Delete"),
               ),

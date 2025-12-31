@@ -20,10 +20,10 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   Future<void> resetPassword() async {
     try {
-      await authService.value.resetPasswordFormCurrentPass(
+      await authService.value.resetPasswordFromCurrentPass(
         userEmail: _emailController.text.trim(),
         oldPassword: _oldPasswordController.text,
-        currentPassword: _newPasswordController.text.trim(),
+        newPassword: _newPasswordController.text.trim(),
       );
 
       if (mounted) {

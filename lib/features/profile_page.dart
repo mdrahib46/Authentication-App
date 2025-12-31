@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Center(
                   child: Text(
-                    'Welcome, ${user!.displayName} ' ,
+                    'Welcome, ${user!.displayName ?? 'User'} ' ,
                     style: kTextStyle.pageTitle,
                   ),
                 ),

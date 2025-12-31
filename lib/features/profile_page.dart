@@ -22,10 +22,13 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       await authService.value.signOut();
       if (mounted) {
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LoginPage()), (route)=> false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Account Successfully logged out!')),
-        );
+        setState(() {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LoginPage()), (route)=> false);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Account Successfully logged out!')),
+          );
+          _errorMessage = '';
+        });
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -38,63 +41,63 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 250,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Text(
-                    'Welcome, ${user!.displayName ?? 'User'} ' ,
-                    style: kTextStyle.pageTitle,
-                  ),
+        child: Column(
+          children: [
+            Container(
+              height: 250,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.teal,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Center(
+                child: Text(
+                  'Welcome, ${user!.displayName ?? 'User'} ' ,
+                  style: kTextStyle.pageTitle,
                 ),
               ),
-              const SizedBox(height: 10),
+            ),
+            const SizedBox(height: 10),
 
-              ListTile(
-                title: Text("Change Username"),
-                trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChangeUsername()),
-                  );
-                  setState(() {});
-                },
-              ),
-              ListTile(
-                title: Text("Reset Password"),
-                trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ResetPassword()),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Delete Account"),
-                trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DeleteAccount()),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Log Out"),
-                trailing: Icon(Icons.arrow_forward_ios),
-                onTap: _logOut,
-              ),
-            ],
-          ),
+            ListTile(
+              title: Text("Change Username"),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChangeUsername()),
+                );
+                setState(() {});
+              },
+            ),
+            ListTile(
+              title: Text("Reset Password"),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ResetPassword()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Delete Account"),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DeleteAccount()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Log Out"),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: _logOut,
+            ),
+            const Spacer(),
+            Text(_errorMessage, style: TextStyle(color: Colors.red),)
+          ],
         ),
       ),
     );

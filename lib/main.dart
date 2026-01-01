@@ -11,7 +11,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  final bool  isFirstTime = sharedPreferences.getBool('isFirstTime') ?? true;
+  final bool  isFirstTime = sharedPreferences.getBool('FirstTime') ?? true;
 
 
   runApp(AuthenticationApp(isFirsTime:  isFirstTime,));

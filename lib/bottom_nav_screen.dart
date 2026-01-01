@@ -1,4 +1,5 @@
-import 'package:authapp/appp/mobile/auth_service.dart';
+
+import 'package:authapp/app/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/features/home_page.dart';
 import 'package:authapp/features/profile_page.dart';

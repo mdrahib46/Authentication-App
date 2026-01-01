@@ -1,4 +1,5 @@
-import 'package:authapp/appp/mobile/auth_service.dart';
+
+import 'package:authapp/app/mobile/auth_service.dart';
 import 'package:authapp/bottom_nav_screen.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/forgotten_password.dart';
@@ -126,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     );
                   },
-                  child: Text('Reset Password'),
+                  child: Text('Forgot Password'),
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

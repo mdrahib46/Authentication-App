@@ -1,4 +1,5 @@
-import 'package:authapp/appp/mobile/auth_service.dart';
+
+import 'package:authapp/app/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/forgotten_password.dart';
 import 'package:authapp/pages/login_page.dart';

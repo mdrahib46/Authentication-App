@@ -1,4 +1,5 @@
-import 'package:authapp/appp/mobile/auth_service.dart';
+
+import 'package:authapp/app/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/change_username.dart';
 import 'package:authapp/pages/delete_account.dart';

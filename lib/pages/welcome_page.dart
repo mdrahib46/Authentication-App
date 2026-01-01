@@ -1,9 +1,8 @@
-import 'package:authapp/pages/login_page.dart';
-import 'package:authapp/pages/register_page.dart';
+
+import 'package:authapp/app/mobile/auth_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../appp/mobile/auth_wrapper.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -13,9 +12,9 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  Future<void> getStartedWith() async {
+  void getStartedWith() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool('isFirstTime', false);
+    sharedPreferences.setBool('FirstTime', false);
     if (mounted) {
       setState(() {
         Navigator.pushAndRemoveUntil(

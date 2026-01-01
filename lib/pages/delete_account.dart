@@ -1,4 +1,4 @@
-import 'package:authapp/appp/mobile/auth_service.dart';
+import 'package:authapp/app/mobile/auth_service.dart';
 import 'package:authapp/constants/constants.dart';
 import 'package:authapp/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';

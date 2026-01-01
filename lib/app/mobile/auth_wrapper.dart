@@ -1,8 +1,9 @@
 
-import 'package:authapp/appp/mobile/auth_service.dart';
 import 'package:authapp/bottom_nav_screen.dart';
 import 'package:authapp/pages/login_page.dart';
 import 'package:flutter/material.dart';
+
+import 'auth_service.dart';
 
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});

@@ -67,6 +67,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
                   decoration: InputDecoration(hintText: 'Email')),
               const SizedBox(height: 10),
               TextFormField(
+                obscureText: true,
                 controller: userPasswordController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(hintText: 'Password')),

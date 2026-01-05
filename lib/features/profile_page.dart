@@ -59,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   if (snapshot.hasData && snapshot.data!.exists) {
                     final data = snapshot.data!.data() as Map<String, dynamic>;
                     displayName = "${data['firstName']} ${data['lastName']}";
-                    print("Display Name: $displayName");
+
                   }
 
                   return Row(

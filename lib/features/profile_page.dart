@@ -5,6 +5,7 @@ import 'package:authapp/pages/change_username.dart';
 import 'package:authapp/pages/delete_account.dart';
 import 'package:authapp/pages/login_page.dart';
 import 'package:authapp/pages/reset_password.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,44 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Text('Authentication App'),
+            const Spacer(),
+            if (user != null)
+              StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user?.uid)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  String displayName = "Unknown";
+
+                  if (snapshot.hasData && snapshot.data!.exists) {
+                    final data = snapshot.data!.data() as Map<String, dynamic>;
+                    displayName = "${data['firstName']} ${data['lastName']}";
+                    print("Display Name: $displayName");
+                  }
+
+                  return Row(
+                    children: [
+                      const Icon(Icons.person),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          child: Text(displayName),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              )
+            else
+              const Text("User: Unknown"),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
